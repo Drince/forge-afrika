@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORGE // Limitless Athletic Evolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        forge: {
+                            black: '#08080A',
+                            dark: '#0F1015',
+                            card: '#161821',
+                            border: '#2A2D3D',
+                            neonRed: '#FF2A4B',
+                            fireOrange: '#FF5E1A',
+                            cyan: '#00F0FF',
+                            gold: '#FFC700'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Teko', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #08080A;
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .font-heading {
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .glow-red {
+            box-shadow: 0 0 25px rgba(255, 42, 75, 0.4);
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+        }
+
+        .text-glow-red {
+            text-shadow: 0 0 12px rgba(255, 42, 75, 0.6);
+        }
+
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+        }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .hero-clip {
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
+        }
+
+        .card-skew {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-skew:hover {
+            transform: translateY(-6px) scale(1.01);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08080A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2D3D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF2A4B;
+        }
+    </style>
+</head>
+<body class="bg-forge-black text-slate-100 antialiased selection:bg-forge-neonRed selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-forge-black/80 backdrop-blur-md border-b border-forge-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-forge-neonRed to-forge-fireOrange rounded-md flex items-center justify-center transform -skew-x-12 group-hover:rotate-6 transition-transform">
+                    <i class="fa-solid fa-bolt text-white text-xl transform skew-x-12"></i>
+                </div>
+                <span class="font-heading text-4xl font-bold tracking-wider text-white">FORGE<span class="text-forge-neonRed">.</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#coaching" class="text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-forge-neonRed transition-colors">Coaching</a>
+                <a href="#plans" class="text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-forge-neonRed transition-colors">Workout Plans</a>
+                <a href="#builder" class="text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-forge-cyan transition-colors">Forge Lab</a>
+                <a href="#archetypes" class="text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-forge-neonRed transition-colors">Archetypes</a>
+                <a href="#merch" class="text-sm font-semibold uppercase tracking-wider text-slate-300 hover:text-forge-neonRed transition-colors">Gear & Merch</a>
+            </nav>
+
+            <!-- Action CTAs -->
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="openModal('login')" class="px-4 py-2 text-sm font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-colors">
+                    Log In
+                </button>
+                <a href="#builder" class="relative group overflow-hidden rounded-md p-px font-semibold text-xs uppercase tracking-widest">
+                    <span class="absolute inset-0 bg-gradient-to-r from-forge-neonRed to-forge-fireOrange group-hover:opacity-90 transition-opacity"></span>
+                    <span class="relative block px-5 py-2.5 bg-forge-black rounded-[5px] text-white group-hover:bg-transparent transition-colors">
+                        Build Your Protocol
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-forge-dark border-b border-forge-border px-4 pt-2 pb-6 space-y-4">
+            <a href="#coaching" onclick="toggleMobileMenu()" class="block text-base font-semibold uppercase tracking-wider text-slate-200 hover:text-forge-neonRed py-2">Coaching</a>
+            <a href="#plans" onclick="toggleMobileMenu()" class="block text-base font-semibold uppercase tracking-wider text-slate-200 hover:text-forge-neonRed py-2">Workout Plans</a>
+            <a href="#builder" onclick="toggleMobileMenu()" class="block text-base font-semibold uppercase tracking-wider text-forge-cyan py-2">Forge Lab (Builder)</a>
+            <a href="#archetypes" onclick="toggleMobileMenu()" class="block text-base font-semibold uppercase tracking-wider text-slate-200 hover:text-forge-neonRed py-2">Archetypes</a>
+            <a href="#merch" onclick="toggleMobileMenu()" class="block text-base font-semibold uppercase tracking-wider text-slate-200 hover:text-forge-neonRed py-2">Gear & Merch</a>
+            <div class="pt-4 border-t border-forge-border flex flex-col gap-3">
+                <button onclick="openModal('login'); toggleMobileMenu();" class="w-full py-2.5 text-center text-sm font-bold uppercase tracking-wider border border-forge-border rounded-md text-white">Log In</button>
+                <a href="#builder" onclick="toggleMobileMenu()" class="w-full py-2.5 text-center text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-forge-neonRed to-forge-fireOrange rounded-md text-white">Build Protocol</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative pt-32 pb-24 lg:pt-44 lg:pb-36 hero-clip bg-grid-pattern overflow-hidden">
+        <!-- Ambient Radial Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-forge-neonRed/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[350px] h-[350px] bg-forge-cyan/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forge-card border border-forge-neonRed/40 text-forge-neonRed text-xs font-bold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-forge-neonRed animate-ping"></span>
+                        Next Generation Fitness System
+                    </div>
+
+                    <h1 class="font-heading text-6xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.88] text-white">
+                        Break Your <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-forge-neonRed via-forge-fireOrange to-forge-gold text-glow-red">
+                            Human Limits
+                        </span>
+                    </h1>
+
+                    <p class="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Forge your ultimate physique with hyper-structured coaching, elite powerlifting protocols, and athletic conditioning inspired by legendary anime character transformations.
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#builder" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-forge-neonRed to-forge-fireOrange hover:from-forge-fireOrange hover:to-forge-neonRed text-white font-extrabold text-sm uppercase tracking-wider rounded-md glow-red transition-all transform hover:-translate-y-0.5 text-center">
+                            Start Interactive Builder <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#plans" class="w-full sm:w-auto px-8 py-4 bg-forge-card hover:bg-forge-border border border-forge-border text-slate-200 font-bold text-sm uppercase tracking-wider rounded-md transition-all text-center">
+                            Explore Protocols
+                        </a>
+                    </div>
+
+                    <!-- Key Stats Counter -->
+                    <div class="pt-10 grid grid-cols-3 gap-4 border-t border-forge-border/60">
+                        <div>
+                            <div class="font-heading text-4xl lg:text-5xl font-bold text-white">12.8K+</div>
+                            <div class="text-xs uppercase text-slate-400 font-semibold tracking-wider">Athletes Transformed</div>
+                        </div>
+                        <div>
+                            <div class="font-heading text-4xl lg:text-5xl font-bold text-forge-cyan text-glow-cyan">99.4%</div>
+                            <div class="text-xs uppercase text-slate-400 font-semibold tracking-wider">Program Completion</div>
+                        </div>
+                        <div>
+                            <div class="font-heading text-4xl lg:text-5xl font-bold text-forge-gold">4.9/5</div>
+                            <div class="text-xs uppercase text-slate-400 font-semibold tracking-wider">Member Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Column (Interactive Card Preview) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative w-full max-w-md mx-auto aspect-[4/5] rounded-2xl bg-gradient-to-b from-forge-card to-forge-dark border border-forge-border p-6 shadow-2xl flex flex-col justify-between overflow-hidden group">
+                        <!-- Image Background Accent -->
+                        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-700 pointer-events-none" 
+                             style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-forge-dark via-forge-dark/70 to-transparent"></div>
+
+                        <!-- Card Header Tags -->
+                        <div class="relative z-10 flex justify-between items-start">
+                            <span class="px-3 py-1 bg-forge-black/80 backdrop-blur border border-forge-cyan/50 text-forge-cyan text-xs font-bold uppercase tracking-wider rounded">
+                                Tier S Protocol
+                            </span>
+                            <span class="font-heading text-2xl font-bold text-slate-400">#01_ORIGIN</span>
+                        </div>
+
+                        <!-- Card Body Details -->
+                        <div class="relative z-10 space-y-4">
+                            <div class="inline-block px-2.5 py-0.5 bg-forge-neonRed/20 text-forge-neonRed border border-forge-neonRed/30 text-[10px] font-black uppercase tracking-widest rounded">
+                                Hypertrophy & Power
+                            </div>
+                            <h3 class="font-heading text-4xl font-extrabold text-white leading-none">
+                                DEMON BACK & SHRED
+                            </h3>
+                            <p class="text-slate-300 text-xs leading-relaxed line-clamp-2">
+                                Heavy row variations, explosive pull-ups, and targeted rear delt supersets designed to sculpt a V-taper of mythic proportions.
+                            </p>
+
+                            <!-- Mini Metrics Grid -->
+                            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-700/60 text-center">
+                                <div class="bg-forge-black/60 p-2 rounded border border-forge-border/40">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Duration</div>
+                                    <div class="text-sm font-bold text-white">8 Weeks</div>
+                                </div>
+                                <div class="bg-forge-black/60 p-2 rounded border border-forge-border/40">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Frequency</div>
+                                    <div class="text-sm font-bold text-white">5x / Wk</div>
+                                </div>
+                                <div class="bg-forge-black/60 p-2 rounded border border-forge-border/40">
+                                    <div class="text-[10px] text-slate-400 font-bold uppercase">Intensity</div>
+                                    <div class="text-sm font-bold text-forge-neonRed">Extreme</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="builder" class="py-20 bg-forge-dark border-y border-forge-border/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="text-forge-cyan text-xs font-bold uppercase tracking-widest mb-2">Forge Lab Interactive Suite</div>
+                <h2 class="font-heading text-5xl sm:text-6xl font-black uppercase text-white">Custom Protocol Generator</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Configure your athletic objective to construct a tailored workout regimen aligned with your transformation goal.</p>
+            </div>
+
+            <!-- Builder Interactive Interface -->
+            <div class="bg-forge-card border border-forge-border rounded-2xl p-6 lg:p-10 shadow-2xl">
+                <div class="grid lg:grid-cols-12 gap-8">
+                    
+                    <!-- Form Controls -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Step 1: Goal Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">1. Primary Objective</label>
+                            <div class="grid grid-cols-3 gap-3" id="goal-options">
+                                <button type="button" onclick="selectGoal('hypertrophy')" class="goal-btn active p-3 rounded-lg border border-forge-neonRed bg-forge-neonRed/10 text-white font-bold text-xs uppercase tracking-wider hover:border-forge-neonRed transition-all text-center">
+                                    <i class="fa-solid fa-dumbbell block text-lg mb-1 text-forge-neonRed"></i>
+                                    Hypertrophy
+                                </button>
+                                <button type="button" onclick="selectGoal('strength')" class="goal-btn p-3 rounded-lg border border-forge-border bg-forge-black text-slate-400 font-bold text-xs uppercase tracking-wider hover:border-forge-neonRed transition-all text-center">
+                                    <i class="fa-solid fa-weight-hanging block text-lg mb-1"></i>
+                                    Max Strength
+                                </button>
+                                <button type="button" onclick="selectGoal('conditioning')" class="goal-btn p-3 rounded-lg border border-forge-border bg-forge-black text-slate-400 font-bold text-xs uppercase tracking-wider hover:border-forge-neonRed transition-all text-center">
+                                    <i class="fa-solid fa-bolt-lightning block text-lg mb-1"></i>
+                                    Agility & Endurance
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Fitness Level Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-bold uppercase tracking-wider text-slate-300">2. Experience Tier</label>
+                                <span id="level-label" class="text-xs font-bold uppercase text-forge-cyan">Intermediate (Tier 2)</span>
+                            </div>
+                            <input type="range" id="level-slider" min="1" max="3" value="2" oninput="updateBuilder()" class="w-full h-2 bg-forge-black rounded-lg appearance-none cursor-pointer accent-forge-cyan">
+                            <div class="flex justify-between text-[10px] text-slate-500 font-bold uppercase mt-1">
+                                <span>Initiate</span>
+                                <span>Intermediate</span>
+                                <span>Elite Apex</span>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Days Per Week Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">3. Training Frequency</label>
+                            <div class="grid grid-cols-4 gap-3">
+                                <button type="button" onclick="selectDays(3)" class="day-btn p-2.5 rounded border border-forge-border bg-forge-black text-slate-300 text-xs font-bold uppercase hover:border-forge-cyan">3 Days</button>
+                                <button type="button" onclick="selectDays(4)" class="day-btn active p-2.5 rounded border border-forge-cyan bg-forge-cyan/10 text-white text-xs font-bold uppercase">4 Days</button>
+                                <button type="button" onclick="selectDays(5)" class="day-btn p-2.5 rounded border border-forge-border bg-forge-black text-slate-300 text-xs font-bold uppercase hover:border-forge-cyan">5 Days</button>
+                                <button type="button" onclick="selectDays(6)" class="day-btn p-2.5 rounded border border-forge-border bg-forge-black text-slate-300 text-xs font-bold uppercase hover:border-forge-cyan">6 Days</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Equipment Availability -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">4. Training Environment</label>
+                            <select id="equip-select" onchange="updateBuilder()" class="w-full bg-forge-black border border-forge-border rounded-lg p-3 text-sm font-semibold text-slate-200 focus:outline-none focus:border-forge-neonRed">
+                                <option value="full_gym">Fully Equipped Commercial Gym</option>
+                                <option value="home_barbell">Home Gym (Barbell + Rack + Bench)</option>
+                                <option value="calisthenics">Bodyweight & Resistance Bands Only</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Output Dynamic Preview Card -->
+                    <div class="lg:col-span-5 bg-forge-black border border-forge-border rounded-xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-forge-border pb-4 mb-4">
+                                <div>
+                                    <div class="text-[10px] uppercase font-bold text-slate-400">Generated Protocol</div>
+                                    <h3 id="generated-title" class="font-heading text-3xl font-extrabold text-white">V-TAPER TITAN</h3>
+                                </div>
+                                <span id="archetype-badge" class="px-2.5 py-1 bg-forge-neonRed/20 border border-forge-neonRed text-forge-neonRed text-[10px] font-black uppercase rounded">
+                                    HYPERTROPHY
+                                </span>
+                            </div>
+
+                            <p id="generated-desc" class="text-xs text-slate-300 mb-6 leading-relaxed">
+                                Formulated to maximize muscular density, targeting shoulder-to-waist ratio through high-volume compound sets and isolation burnout finishers.
+                            </p>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="text-xs font-bold uppercase text-slate-400">Weekly Breakdown:</div>
+                                <ul id="generated-routine" class="space-y-2 text-xs text-slate-200">
+                                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                                        <span class="font-bold">Day 1: Heavy Upper Body Power</span>
+                                        <span class="text-slate-400 font-mono">75 Min</span>
+                                    </li>
+                                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                                        <span class="font-bold">Day 2: Lower Body Quads & Calves</span>
+                                        <span class="text-slate-400 font-mono">60 Min</span>
+                                    </li>
+                                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                                        <span class="font-bold">Day 3: Push Hypertrophy + Core</span>
+                                        <span class="text-slate-400 font-mono">60 Min</span>
+                                    </li>
+                                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                                        <span class="font-bold">Day 4: Pull Hypertrophy + Arms</span>
+                                        <span class="text-slate-400 font-mono">65 Min</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button onclick="openModal('download')" class="w-full py-3 bg-forge-cyan text-forge-black font-extrabold text-xs uppercase tracking-widest rounded-md hover:bg-white transition-colors">
+                            Claim Custom Protocol <i class="fa-solid fa-download ml-1"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="py-24 bg-forge-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <div class="text-forge-neonRed text-xs font-bold uppercase tracking-widest mb-2">Curated Programs</div>
+                    <h2 class="font-heading text-5xl sm:text-6xl font-black uppercase text-white">Featured Workout Plans</h2>
+                </div>
+
+                <!-- Plan Filters -->
+                <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
+                    <button onclick="filterPlans('all')" class="plan-filter-btn active px-4 py-2 bg-forge-neonRed text-white text-xs font-bold uppercase rounded-md transition-all">All Plans</button>
+                    <button onclick="filterPlans('hypertrophy')" class="plan-filter-btn px-4 py-2 bg-forge-card border border-forge-border text-slate-300 text-xs font-bold uppercase rounded-md hover:border-slate-500 transition-all">Hypertrophy</button>
+                    <button onclick="filterPlans('strength')" class="plan-filter-btn px-4 py-2 bg-forge-card border border-forge-border text-slate-300 text-xs font-bold uppercase rounded-md hover:border-slate-500 transition-all">Strength</button>
+                    <button onclick="filterPlans('shred')" class="plan-filter-btn px-4 py-2 bg-forge-card border border-forge-border text-slate-300 text-xs font-bold uppercase rounded-md hover:border-slate-500 transition-all">Conditioning</button>
+                </div>
+            </div>
+
+            <!-- Workout Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="plans-container">
+                
+                <!-- Plan 1 -->
+                <div class="plan-card hypertrophy bg-forge-card border border-forge-border rounded-xl overflow-hidden card-skew flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop');">
+                            <div class="absolute inset-0 bg-gradient-to-t from-forge-card via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 px-2.5 py-1 bg-forge-black/80 backdrop-blur text-forge-neonRed border border-forge-neonRed/40 text-[10px] font-black uppercase rounded">
+                                Hypertrophy
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs font-bold text-slate-400 mb-1">12 WEEK PROGRAM</div>
+                            <h3 class="font-heading text-3xl font-bold text-white mb-2">SHINOBI SPEED & POWER</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                                Hybrid athletic program focusing on fast-twitch muscle fibers, explosive plyometrics, and lean muscle retention.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 border-t border-forge-border/40 flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-bold font-heading text-white">$49</span>
+                            <span class="text-xs text-slate-500"> / One-time</span>
+                        </div>
+                        <button onclick="openModal('plan', 'SHINOBI SPEED & POWER')" class="px-4 py-2 bg-forge-black hover:bg-forge-neonRed border border-forge-border hover:border-forge-neonRed text-white text-xs font-bold uppercase tracking-wider rounded transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="plan-card strength bg-forge-card border border-forge-border rounded-xl overflow-hidden card-skew flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop');">
+                            <div class="absolute inset-0 bg-gradient-to-t from-forge-card via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 px-2.5 py-1 bg-forge-black/80 backdrop-blur text-forge-gold border border-forge-gold/40 text-[10px] font-black uppercase rounded">
+                                Strength
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs font-bold text-slate-400 mb-1">8 WEEK PROTOCOL</div>
+                            <h3 class="font-heading text-3xl font-bold text-white mb-2">BERSERKER OVERLOAD</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                                Pure strength wave periodization targeting 1RM PRs on Squat, Bench Press, and Conventional Deadlift.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 border-t border-forge-border/40 flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-bold font-heading text-white">$59</span>
+                            <span class="text-xs text-slate-500"> / One-time</span>
+                        </div>
+                        <button onclick="openModal('plan', 'BERSERKER OVERLOAD')" class="px-4 py-2 bg-forge-black hover:bg-forge-neonRed border border-forge-border hover:border-forge-neonRed text-white text-xs font-bold uppercase tracking-wider rounded transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="plan-card shred bg-forge-card border border-forge-border rounded-xl overflow-hidden card-skew flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop');">
+                            <div class="absolute inset-0 bg-gradient-to-t from-forge-card via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 px-2.5 py-1 bg-forge-black/80 backdrop-blur text-forge-cyan border border-forge-cyan/40 text-[10px] font-black uppercase rounded">
+                                Conditioning
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs font-bold text-slate-400 mb-1">6 WEEK CUT</div>
+                            <h3 class="font-heading text-3xl font-bold text-white mb-2">CYBERPUNK SHRED</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-6">
+                                High density HIIT metabolic conditioning paired with muscle-sparing strength maintenance splits.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 border-t border-forge-border/40 flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-bold font-heading text-white">$39</span>
+                            <span class="text-xs text-slate-500"> / One-time</span>
+                        </div>
+                        <button onclick="openModal('plan', 'CYBERPUNK SHRED')" class="px-4 py-2 bg-forge-black hover:bg-forge-neonRed border border-forge-border hover:border-forge-neonRed text-white text-xs font-bold uppercase tracking-wider rounded transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="archetypes" class="py-24 bg-forge-dark border-y border-forge-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-forge-fireOrange text-xs font-bold uppercase tracking-widest">Character Transformations</span>
+                <h2 class="font-heading text-5xl sm:text-6xl font-black uppercase text-white">Training Archetypes</h2>
+                <p class="text-slate-400 text-sm">Align your physical evolution with legendary aesthetic profiles engineered for specific biomechanical results.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Archetype 1 -->
+                <div class="bg-forge-card border border-forge-border rounded-xl p-6 relative overflow-hidden group hover:border-forge-neonRed transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-forge-neonRed/10 border border-forge-neonRed flex items-center justify-center text-forge-neonRed text-2xl font-black">
+                            01
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-3xl font-bold text-white leading-none">THE SHREDDED AVENGING WARRIOR</h3>
+                            <span class="text-[10px] font-bold text-forge-neonRed uppercase">Ultra Low Bodyfat & Muscle Density</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                        Modeled after agile sword-masters and lone warriors. Emphasizes striated shoulders, tight waistline, serratus development, and elite cardiovascular stamina.
+                    </p>
+                    <div class="space-y-2 text-xs border-t border-forge-border/60 pt-4">
+                        <div class="flex justify-between"><span class="text-slate-500">Primary Lift:</span><span class="font-bold text-slate-200">Weighted Pull-ups</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Cardio Protocol:</span><span class="font-bold text-slate-200">Tabata Sprints</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Dietary Focus:</span><span class="font-bold text-slate-200">Protein Satiety & Refeeds</span></div>
+                    </div>
+                </div>
+
+                <!-- Archetype 2 -->
+                <div class="bg-forge-card border border-forge-border rounded-xl p-6 relative overflow-hidden group hover:border-forge-cyan transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-forge-cyan/10 border border-forge-cyan flex items-center justify-center text-forge-cyan text-2xl font-black">
+                            02
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-3xl font-bold text-white leading-none">THE TITAN BEHEMOTH</h3>
+                            <span class="text-[10px] font-bold text-forge-cyan uppercase">Massive Hypertrophy & Raw Power</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                        For athletes seeking overwhelming physical presence, thick upper back mass, boulder traps, and massive leg thickness inspired by unstoppable titan transformations.
+                    </p>
+                    <div class="space-y-2 text-xs border-t border-forge-border/60 pt-4">
+                        <div class="flex justify-between"><span class="text-slate-500">Primary Lift:</span><span class="font-bold text-slate-200">Axle Bar Deadlift</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Cardio Protocol:</span><span class="font-bold text-slate-200">Weighted Sled Pushes</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Dietary Focus:</span><span class="font-bold text-slate-200">Caloric Surplus Hyper-Fuel</span></div>
+                    </div>
+                </div>
+
+                <!-- Archetype 3 -->
+                <div class="bg-forge-card border border-forge-border rounded-xl p-6 relative overflow-hidden group hover:border-forge-gold transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-forge-gold/10 border border-forge-gold flex items-center justify-center text-forge-gold text-2xl font-black">
+                            03
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-3xl font-bold text-white leading-none">THE SAIYAN UNLOCK</h3>
+                            <span class="text-[10px] font-bold text-forge-gold uppercase">Functional Explosiveness & Aura</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">
+                        Balanced elite power, supreme agility, fast recovery capabilities, and round, full muscle bellies built through heavy compound lifts paired with plyometric supersets.
+                    </p>
+                    <div class="space-y-2 text-xs border-t border-forge-border/60 pt-4">
+                        <div class="flex justify-between"><span class="text-slate-500">Primary Lift:</span><span class="font-bold text-slate-200">Clean & Jerk / Front Squat</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Cardio Protocol:</span><span class="font-bold text-slate-200">Heavy Bag Conditioning</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Dietary Focus:</span><span class="font-bold text-slate-200">Intra-workout Carbs</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaching" class="py-24 bg-forge-black relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-forge-neonRed text-xs font-bold uppercase tracking-widest">Elite Direct Access</span>
+                    <h2 class="font-heading text-5xl sm:text-6xl font-black uppercase text-white leading-tight">
+                        1-On-1 Personal <br/><span class="text-forge-neonRed">Coaching Program</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                        Work directly with master fitness coaches to build custom macro nutrition targets, video technique breakdown reviews, and weekly progressive overload adjustments tailored exclusively to your biology.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4 bg-forge-card p-4 rounded-lg border border-forge-border">
+                            <div class="text-forge-neonRed text-xl"><i class="fa-solid fa-square-check"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Custom Form Analysis</h4>
+                                <p class="text-xs text-slate-400">Weekly video critiques to perfect squat, bench, and deadlift mechanics.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-forge-card p-4 rounded-lg border border-forge-border">
+                            <div class="text-forge-neonRed text-xl"><i class="fa-solid fa-utensils"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Metabolic & Macro Alignment</h4>
+                                <p class="text-xs text-slate-400">Dynamic nutrition plans tailored for aggressive fat loss or maximum hypertrophy.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-forge-card p-4 rounded-lg border border-forge-border">
+                            <div class="text-forge-neonRed text-xl"><i class="fa-solid fa-comments"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">24/7 VIP Messaging</h4>
+                                <p class="text-xs text-slate-400">Direct WhatsApp / Discord channel access with your designated lead coach.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('coaching_apply')" class="px-8 py-4 bg-gradient-to-r from-forge-neonRed to-forge-fireOrange text-white font-extrabold text-xs uppercase tracking-wider rounded-md glow-red hover:opacity-90 transition-all">
+                        Apply For Coaching Spot
+                    </button>
+                </div>
+
+                <!-- Coaching Application Preview Form -->
+                <div class="lg:col-span-6 bg-forge-card border border-forge-border rounded-2xl p-8 relative">
+                    <div class="text-center mb-6">
+                        <h3 class="font-heading text-3xl font-bold text-white">Coaching Eligibility Screening</h3>
+                        <p class="text-xs text-slate-400">Limited spots available to ensure high coaching quality.</p>
+                    </div>
+
+                    <form onsubmit="handleCoachingSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Full Name</label>
+                            <input type="text" required placeholder="John Doe" class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Email Address</label>
+                            <input type="email" required placeholder="john@example.com" class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Primary Goal</label>
+                            <select class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed">
+                                <option>Prepare for Powerlifting Meet</option>
+                                <option>Aggressive Body Recomposition</option>
+                                <option>Anime Aesthetic V-Taper</option>
+                                <option>Athletic Speed & Explosiveness</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Current Fitness Challenge</label>
+                            <textarea rows="3" placeholder="Tell us about your current plateau or obstacles..." class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-forge-neonRed hover:bg-forge-fireOrange text-white font-bold text-xs uppercase tracking-wider rounded transition-colors">
+                            Submit Consultation Request
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="merch" class="py-24 bg-forge-dark border-t border-forge-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-forge-cyan text-xs font-bold uppercase tracking-widest">Forge Supply Drop</span>
+                    <h2 class="font-heading text-5xl sm:text-6xl font-black uppercase text-white">Custom Merchandise & Apparel</h2>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2">
+                    <button onclick="filterMerch('all')" class="merch-filter-btn active px-3.5 py-1.5 bg-forge-cyan text-forge-black text-xs font-bold uppercase rounded">All Items</button>
+                    <button onclick="filterMerch('apparel')" class="merch-filter-btn px-3.5 py-1.5 bg-forge-card border border-forge-border text-slate-300 text-xs font-bold uppercase rounded">Apparel</button>
+                    <button onclick="filterMerch('gear')" class="merch-filter-btn px-3.5 py-1.5 bg-forge-card border border-forge-border text-slate-300 text-xs font-bold uppercase rounded">Gear</button>
+                </div>
+            </div>
+
+            <!-- Merch Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="merch-container">
+                
+                <!-- Merch Item 1 -->
+                <div class="merch-card apparel bg-forge-card border border-forge-border rounded-xl p-4 flex flex-col justify-between group hover:border-forge-neonRed transition-colors">
+                    <div>
+                        <div class="aspect-square bg-forge-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop" alt="Oversized Pump Cover" class="object-cover w-full h-full opacity-80 group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2 right-2 px-2 py-0.5 bg-forge-neonRed text-white text-[10px] font-bold uppercase rounded">HOT</span>
+                        </div>
+                        <div class="text-[10px] font-bold text-forge-neonRed uppercase mb-1">Heavyweight Cotton</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-1">"LIMITLESS" OVERSIZED TEE</h3>
+                        <p class="text-xs text-slate-400 mb-3">$42.00 USD</p>
+                    </div>
+                    <button onclick="addToCart('LIMITLESS Oversized Tee', 42)" class="w-full py-2 bg-forge-black hover:bg-forge-neonRed border border-forge-border text-white text-xs font-bold uppercase rounded transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Add To Cart
+                    </button>
+                </div>
+
+                <!-- Merch Item 2 -->
+                <div class="merch-card gear bg-forge-card border border-forge-border rounded-xl p-4 flex flex-col justify-between group hover:border-forge-cyan transition-colors">
+                    <div>
+                        <div class="aspect-square bg-forge-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop" alt="Lifting Belt" class="object-cover w-full h-full opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="text-[10px] font-bold text-forge-cyan uppercase mb-1">10mm Genuine Leather</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-1">FORGE LEVER BELT</h3>
+                        <p class="text-xs text-slate-400 mb-3">$110.00 USD</p>
+                    </div>
+                    <button onclick="addToCart('FORGE Lever Belt', 110)" class="w-full py-2 bg-forge-black hover:bg-forge-cyan hover:text-forge-black border border-forge-border text-white text-xs font-bold uppercase rounded transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Add To Cart
+                    </button>
+                </div>
+
+                <!-- Merch Item 3 -->
+                <div class="merch-card apparel bg-forge-card border border-forge-border rounded-xl p-4 flex flex-col justify-between group hover:border-forge-neonRed transition-colors">
+                    <div>
+                        <div class="aspect-square bg-forge-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop" alt="Anime Hoodie" class="object-cover w-full h-full opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="text-[10px] font-bold text-forge-neonRed uppercase mb-1">Fleece Lined</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-1">BERSERK COMPRESSION HOODIE</h3>
+                        <p class="text-xs text-slate-400 mb-3">$68.00 USD</p>
+                    </div>
+                    <button onclick="addToCart('Berserk Compression Hoodie', 68)" class="w-full py-2 bg-forge-black hover:bg-forge-neonRed border border-forge-border text-white text-xs font-bold uppercase rounded transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Add To Cart
+                    </button>
+                </div>
+
+                <!-- Merch Item 4 -->
+                <div class="merch-card gear bg-forge-card border border-forge-border rounded-xl p-4 flex flex-col justify-between group hover:border-forge-gold transition-colors">
+                    <div>
+                        <div class="aspect-square bg-forge-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?q=80&w=600&auto=format&fit=crop" alt="Wrist Wraps" class="object-cover w-full h-full opacity-80 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="text-[10px] font-bold text-forge-gold uppercase mb-1">Heavy Elastic</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-1">PRO WRIST WRAPS (PAIR)</h3>
+                        <p class="text-xs text-slate-400 mb-3">$24.00 USD</p>
+                    </div>
+                    <button onclick="addToCart('Pro Wrist Wraps', 24)" class="w-full py-2 bg-forge-black hover:bg-forge-gold hover:text-forge-black border border-forge-border text-white text-xs font-bold uppercase rounded transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Add To Cart
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-forge-black border-t border-forge-border pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 pb-12 border-b border-forge-border/60">
+                
+                <div class="col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-forge-neonRed to-forge-fireOrange rounded flex items-center justify-center">
+                            <i class="fa-solid fa-bolt text-white text-sm"></i>
+                        </div>
+                        <span class="font-heading text-3xl font-bold tracking-wider text-white">FORGE<span class="text-forge-neonRed">.</span></span>
+                    </a>
+                    <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
+                        The ultimate modern fitness ecosystem pairing sports science with high-octane aesthetic training protocols.
+                    </p>
+                    <div class="flex gap-4 text-slate-400 text-lg">
+                        <a href="#" class="hover:text-forge-neonRed transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-forge-neonRed transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="hover:text-forge-neonRed transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="hover:text-forge-neonRed transition-colors"><i class="fa-brands fa-discord"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#coaching" class="hover:text-white">Personal Coaching</a></li>
+                        <li><a href="#plans" class="hover:text-white">Workout Plans</a></li>
+                        <li><a href="#builder" class="hover:text-white">Protocol Builder</a></li>
+                        <li><a href="#merch" class="hover:text-white">Apparel & Gear</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Archetypes</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#archetypes" class="hover:text-white">Avenging Warrior</a></li>
+                        <li><a href="#archetypes" class="hover:text-white">Titan Behemoth</a></li>
+                        <li><a href="#archetypes" class="hover:text-white">Saiyan Unlock</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Support & Legal</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 FORGE Fitness Inc. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Engineered for human evolution.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-card" class="bg-forge-card border border-forge-border w-full max-w-lg rounded-2xl p-6 sm:p-8 relative shadow-2xl transform scale-95 transition-transform duration-200">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-forge-card border border-forge-neonRed px-5 py-3 rounded-lg shadow-xl hidden flex items-center gap-3 text-xs font-bold text-white">
+        <i class="fa-solid fa-circle-check text-forge-neonRed text-lg"></i>
+        <span id="toast-message">Action completed successfully.</span>
+    </div>
+
+    <script>
+        // State Management
+        let cart = [];
+        let builderState = {
+            goal: 'hypertrophy',
+            level: 2,
+            days: 4,
+            equipment: 'full_gym'
+        };
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Protocol Builder Goal Select
+        function selectGoal(goal) {
+            builderState.goal = goal;
+            document.querySelectorAll('#goal-options .goal-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-forge-neonRed', 'bg-forge-neonRed/10', 'text-white');
+                btn.classList.add('border-forge-border', 'bg-forge-black', 'text-slate-400');
+            });
+            event.currentTarget.classList.add('active', 'border-forge-neonRed', 'bg-forge-neonRed/10', 'text-white');
+            event.currentTarget.classList.remove('border-forge-border', 'bg-forge-black', 'text-slate-400');
+            updateBuilder();
+        }
+
+        // Protocol Builder Days Select
+        function selectDays(days) {
+            builderState.days = days;
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-forge-cyan', 'bg-forge-cyan/10', 'text-white');
+                btn.classList.add('border-forge-border', 'bg-forge-black', 'text-slate-300');
+            });
+            event.currentTarget.classList.add('active', 'border-forge-cyan', 'bg-forge-cyan/10', 'text-white');
+            event.currentTarget.classList.remove('border-forge-border', 'bg-forge-black', 'text-slate-300');
+            updateBuilder();
+        }
+
+        // Update Dynamic Builder Output
+        function updateBuilder() {
+            const slider = document.getElementById('level-slider');
+            builderState.level = parseInt(slider.value);
+            
+            const levelLabel = document.getElementById('level-label');
+            const levels = ['Initiate (Tier 1)', 'Intermediate (Tier 2)', 'Elite Apex (Tier 3)'];
+            levelLabel.innerText = levels[builderState.level - 1];
+
+            const title = document.getElementById('generated-title');
+            const desc = document.getElementById('generated-desc');
+            const badge = document.getElementById('archetype-badge');
+            const routine = document.getElementById('generated-routine');
+
+            if (builderState.goal === 'hypertrophy') {
+                title.innerText = "V-TAPER TITAN";
+                badge.innerText = "HYPERTROPHY";
+                badge.className = "px-2.5 py-1 bg-forge-neonRed/20 border border-forge-neonRed text-forge-neonRed text-[10px] font-black uppercase rounded";
+                desc.innerText = "Formulated to maximize muscular density, targeting shoulder-to-waist ratio through high-volume compound sets and isolation burnout finishers.";
+                routine.innerHTML = `
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 1: Heavy Upper Body Power</span>
+                        <span class="text-slate-400 font-mono">75 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 2: Lower Body Quads & Calves</span>
+                        <span class="text-slate-400 font-mono">60 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 3: Push Hypertrophy + Core</span>
+                        <span class="text-slate-400 font-mono">60 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 4: Pull Hypertrophy + Arms</span>
+                        <span class="text-slate-400 font-mono">65 Min</span>
+                    </li>
+                `;
+            } else if (builderState.goal === 'strength') {
+                title.innerText = "BERSERKER OVERLORD";
+                badge.innerText = "RAW STRENGTH";
+                badge.className = "px-2.5 py-1 bg-forge-gold/20 border border-forge-gold text-forge-gold text-[10px] font-black uppercase rounded";
+                desc.innerText = "Heavy 80-90% 1RM periodized compound lifting focused on CNS adaptation and maximum force production.";
+                routine.innerHTML = `
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 1: Heavy Squat & Accessory</span>
+                        <span class="text-slate-400 font-mono">80 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 2: Heavy Bench & Upper Accessories</span>
+                        <span class="text-slate-400 font-mono">75 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 3: Conventional Deadlift Overload</span>
+                        <span class="text-slate-400 font-mono">90 Min</span>
+                    </li>
+                `;
+            } else {
+                title.innerText = "CYBER SHINOBI AGILITY";
+                badge.innerText = "CONDITIONING";
+                badge.className = "px-2.5 py-1 bg-forge-cyan/20 border border-forge-cyan text-forge-cyan text-[10px] font-black uppercase rounded";
+                desc.innerText = "High density metabolic conditioning, plyometrics, and calisthenic endurance supersets.";
+                routine.innerHTML = `
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 1: Explosive Plyometrics & Core</span>
+                        <span class="text-slate-400 font-mono">50 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 2: Metabolic Sprints & Calisthenics</span>
+                        <span class="text-slate-400 font-mono">45 Min</span>
+                    </li>
+                    <li class="flex justify-between items-center bg-forge-dark p-2 rounded border border-forge-border/40">
+                        <span class="font-bold">Day 3: Full Body Density Circuit</span>
+                        <span class="text-slate-400 font-mono">55 Min</span>
+                    </li>
+                `;
+            }
+        }
+
+        // Plan Filters
+        function filterPlans(category) {
+            document.querySelectorAll('.plan-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-forge-neonRed', 'text-white');
+                btn.classList.add('bg-forge-card', 'text-slate-300');
+            });
+            event.currentTarget.classList.add('bg-forge-neonRed', 'text-white');
+
+            const cards = document.querySelectorAll('.plan-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Merch Filters
+        function filterMerch(category) {
+            document.querySelectorAll('.merch-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-forge-cyan', 'text-forge-black');
+                btn.classList.add('bg-forge-card', 'text-slate-300');
+            });
+            event.currentTarget.classList.add('bg-forge-cyan', 'text-forge-black');
+
+            const items = document.querySelectorAll('.merch-card');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal Handlers
+        function openModal(type, extraData) {
+            const backdrop = document.getElementById('modal-backdrop');
+            const content = document.getElementById('modal-content');
+            
+            if (type === 'login') {
+                content.innerHTML = `
+                    <h3 class="font-heading text-3xl font-bold text-white mb-2">Member Portal Access</h3>
+                    <p class="text-xs text-slate-400 mb-6">Enter your credentials to access your workout dashboards.</p>
+                    <form onsubmit="handleModalAction(event, 'Logged In Successfully')" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Email</label>
+                            <input type="email" required placeholder="athlete@forge.com" class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Password</label>
+                            <input type="password" required placeholder="••••••••" class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-neonRed">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-forge-neonRed text-white font-bold text-xs uppercase tracking-wider rounded">Log In</button>
+                    </form>
+                `;
+            } else if (type === 'download') {
+                content.innerHTML = `
+                    <div class="text-center">
+                        <i class="fa-solid fa-file-pdf text-4xl text-forge-cyan mb-3"></i>
+                        <h3 class="font-heading text-3xl font-bold text-white mb-2">Protocol Ready</h3>
+                        <p class="text-xs text-slate-400 mb-6">Enter your email address to receive the full custom training PDF split & exercise spreadsheet.</p>
+                        <form onsubmit="handleModalAction(event, 'PDF Protocol Sent to Email')" class="space-y-4">
+                            <input type="email" required placeholder="athlete@forge.com" class="w-full bg-forge-black border border-forge-border rounded p-3 text-xs text-white focus:outline-none focus:border-forge-cyan">
+                            <button type="submit" class="w-full py-3 bg-forge-cyan text-forge-black font-extrabold text-xs uppercase tracking-wider rounded">Send Protocol PDF</button>
+                        </form>
+                    </div>
+                `;
+            } else if (type === 'plan') {
+                content.innerHTML = `
+                    <h3 class="font-heading text-3xl font-bold text-white mb-2">${extraData}</h3>
+                    <p class="text-xs text-slate-400 mb-4">Complete 12-week program includes video demonstration library, macro templates, and mobility warmups.</p>
+                    <div class="bg-forge-black p-4 rounded border border-forge-border text-xs text-slate-300 mb-6 space-y-2">
+                        <div class="flex justify-between"><span>Format:</span><span class="font-bold text-white">Digital PDF + Video Portal</span></div>
+                        <div class="flex justify-between"><span>Level:</span><span class="font-bold text-white">Intermediate to Advanced</span></div>
+                        <div class="flex justify-between"><span>Access:</span><span class="font-bold text-forge-neonRed">Lifetime Access</span></div>
+                    </div>
+                    <button onclick="handleModalAction(null, 'Added program to checkout'); closeModal();" class="w-full py-3 bg-gradient-to-r from-forge-neonRed to-forge-fireOrange text-white font-extrabold text-xs uppercase tracking-wider rounded">Proceed to Instant Access</button>
+                `;
+            }
+
+            backdrop.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        }
+
+        function handleModalAction(e, message) {
+            if (e) e.preventDefault();
+            closeModal();
+            showToast(message);
+        }
+
+        function handleCoachingSubmit(e) {
+            e.preventDefault();
+            showToast("Coaching Application Submitted!");
+            e.target.reset();
+        }
+
+        function addToCart(itemName, price) {
+            cart.push({ name: itemName, price: price });
+            showToast(`Added ${itemName} to Cart`);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
